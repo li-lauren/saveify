@@ -6,6 +6,10 @@ import os
 import base64
 import requests
 import logging
+import time
+
+# Ref: https://medium.com/analytics-vidhya/discoverdaily-a-flask-web-application-built-with-the-spotify-api-and-deployed-on-google-cloud-6c046e6e731b
+
 
 SPOTIFY_CLIENT_ID = os.environ['SPOTIFY_CLIENT_ID']
 SPOTIFY_SECRET = os.environ['SPOTIFY_SECRET']
@@ -65,13 +69,13 @@ def checkTokenStatus(session):
 
 
 def getReq(session, url, params={}):
-    headers = {'Authorization': f'Bearer {session['token']}'}
+    headers = {'Authorization': f'Bearer {session["token"]}'}
     response = requests.get(url, headers=headers, params=params)
 
     if response.status_code == 200:
         return response.json()
 
-    elif response.status_code == 401 and checkTokenStatus(sesion) != None:
+    elif response.status_code == 401 and checkTokenStatus(session) != None:
         return getReq(session, url, params)
 
     else:
