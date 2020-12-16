@@ -6,6 +6,7 @@ from model import connect_to_db
 import crud
 
 import urllib
+import logging
 import time
 
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -47,6 +48,12 @@ def authorize_callback():
     else:
         #error
         print('Token access failed')
+
+    user = crud.getUserInfo(session)
+    session['user_id'] = user['id']
+    logging.info('new user:' + session['user_id'])
+
+    return redirect('/')
 
 
 

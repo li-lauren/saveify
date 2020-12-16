@@ -82,6 +82,15 @@ def getReq(session, url, params={}):
         logging.error('getReq:' + str(response.status_code))
         return None
 
+def getUserInfo(session):
+    url = 'https://api.spotify.com/v1/me'
+    payload = getReq(session, url)
+    
+    if payload == None:
+        return None
+
+    return payload
+
 
 if __name__ == '__main__':
     from server import app
