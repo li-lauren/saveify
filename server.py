@@ -22,7 +22,7 @@ def index():
 
 @app.route('/authorize')
 def authorize():
-    scopes = 'playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative'
+    scopes = 'playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-read-email user-read-private'
 
     spotify_authorize_url = 'https://accounts.spotify.com/authorize?'
     params = {
