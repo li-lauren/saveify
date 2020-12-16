@@ -14,7 +14,7 @@ def getToken(code):
     token_url = 'https://accounts.spotify.com/api/token'
     authorization = 'Basic ' + base64.standard_b64encode(
         SPOTIFY_CLIENT_ID + ':' + SPOTIFY_SECRET)
-    redirect_uri = 'http://0.0.0.0:5000/'
+    redirect_uri = 'http://0.0.0.0:5000/callback'
 
     headers = {'Authorization': authorization, 
              'Accept': 'application/json', 
@@ -30,6 +30,22 @@ def getToken(code):
         logging.error('getToken:' + str(post_response.status_code))
         return None
     
+
+def refreshToken(refresh_token):
+    token_url = 'https://accounts.spotify.com/api/token'
+    authorization = 'Basic ' + base64.standard_b64encode(
+        SPOTIFY_CLIENT_ID + ':' + SPOTIFY_SECRET)
+
+    headers = {'Authorization': authorization, 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
+	body = {'refresh_token': refresh_token, 'grant_type': 'refresh_token'}
+	post_response = requests.post(token_url, headers=headers, data=body)
+
+	# 200 code indicates access token was properly granted
+	if post_response.status_code == 200:
+		return post_response.json()['access_token'], post_response.json()['expires_in']
+	else:
+		logging.error('refreshToken:' + str(post_response.status_code))
+		return None
 
 
 if __name__ == '__main__':
