@@ -27,7 +27,7 @@ def authorize():
         'response_type': 'code', 
         'client_id': SPOTIFY_CLIENT_ID,
         'redirect_uri': 'http://0.0.0.0:5000/',
-        'scope': scopes,
+        'scope': scopes
     }
 
     query_params = urllib.parse.urlencode(params)
