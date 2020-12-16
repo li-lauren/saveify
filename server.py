@@ -6,6 +6,7 @@ from model import connect_to_db
 import crud
 
 import urllib
+import time
 
 SECRET_KEY = os.environ['SECRET_KEY']
 SPOTIFY_CLIENT_ID = os.environ['SPOTIFY_CLIENT_ID']
@@ -33,6 +34,20 @@ def authorize():
     query_params = urllib.parse.urlencode(params)
     response = make_response(redirect(spotify_authorize_url + query_params))
     return response
+
+@app.route('/callback')
+def authorize_callback():
+    code = request.args.get('code')
+    
+    payload = crud.getToken(code)
+    if payload:
+        session['token'] = payload[0]
+        session['refresh_token'] = payload[1]
+        session['token_expiration'] = time.time() + payload[2]
+    else:
+        #error
+        print('Token access failed')
+
 
 
 if __name__ == '__main__':
