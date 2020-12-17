@@ -28,7 +28,7 @@ def authorize():
     params = {
         'response_type': 'code', 
         'client_id': SPOTIFY_CLIENT_ID,
-        'redirect_uri': 'http://0.0.0.0:5000/',
+        'redirect_uri': 'http://0.0.0.0:5000/callback',
         'scope': scopes
     }
 
@@ -52,6 +52,7 @@ def authorize_callback():
     user = crud.getUserInfo(session)
     session['user_id'] = user['id']
     logging.info('new user:' + session['user_id'])
+    print(session['user_id'])
 
     return redirect('/')
 

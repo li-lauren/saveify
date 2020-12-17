@@ -16,15 +16,13 @@ SPOTIFY_SECRET = os.environ['SPOTIFY_SECRET']
 
 def getToken(code): 
     token_url = 'https://accounts.spotify.com/api/token'
-    authorization = 'Basic ' + base64.standard_b64encode(
-        SPOTIFY_CLIENT_ID + ':' + SPOTIFY_SECRET)
     redirect_uri = 'http://0.0.0.0:5000/callback'
 
-    headers = {'Authorization': authorization, 
-             'Accept': 'application/json', 
-             'Content-Type': 'application/x-www-form-urlencoded'}
+    headers = {'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
     body = {'code': code, 'redirect_uri': redirect_uri, 
-            'grant_type': 'authorization_code'}
+            'grant_type': 'authorization_code', 
+            'client_id': SPOTIFY_CLIENT_ID,
+            'client_secret': SPOTIFY_SECRET}
     post_response = requests.post(token_url,headers=headers,data=body)
     
     if post_response.status_code == 200:
@@ -37,10 +35,14 @@ def getToken(code):
 
 def refreshToken(refresh_token):
     token_url = 'https://accounts.spotify.com/api/token'
-    authorization = 'Basic ' + base64.standard_b64encode(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_SECRET)
 
-    headers = {'Authorization': authorization, 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
-    body = {'refresh_token': refresh_token, 'grant_type': 'refresh_token'}
+    headers = {
+        'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
+    body = {
+        'refresh_token': refresh_token, 
+        'grant_type': 'refresh_token', 
+        'client_id': SPOTIFY_CLIENT_ID, 
+        'client_secret': SPOTIFY_SECRET}
     post_response = requests.post(token_url, headers=headers, data=body)
 
 	# 200 code indicates access token was properly granted
