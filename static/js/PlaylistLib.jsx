@@ -1,6 +1,6 @@
 const PlaylistLib = () => {
     const [playlists, setPlaylists] = useState(null)
-    
+
     const getPlaylists = () => {
         fetch('/playlists')
         .then(res => res.json())
