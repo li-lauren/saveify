@@ -57,6 +57,17 @@ def authorize_callback():
     return redirect('/')
 
 
+@app.route('/playlists')
+def getPlaylists(): 
+    gen_playlist_info = crud.getPlaylists(session)
+
+    playlists = gen_playlist_info['items']
+
+    return playlists
+
+
+
+
 
 if __name__ == '__main__':
     connect_to_db(app)
