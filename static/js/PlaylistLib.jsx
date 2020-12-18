@@ -7,6 +7,10 @@ const PlaylistLib = () => {
         .then(data => console.log(data))
     }
 
+    useEffect(() => {
+        getPlaylists();
+    }, [])
+
     return(
         <div>
             Playlists
