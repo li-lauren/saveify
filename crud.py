@@ -94,6 +94,16 @@ def getUserInfo(session):
     return payload
 
 
+def getPlaylists(session):
+    url = 'https://api.spotify.com/v1/me/playlists'
+    payload = getReq(session, url)
+
+    if payload == None:
+        return None
+
+    return payload
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
