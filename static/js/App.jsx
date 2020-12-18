@@ -3,6 +3,8 @@ const App = () => {
        <div>
            Spotify
 
+           <PlaylistLib />
+
        </div>
    ) 
 }
