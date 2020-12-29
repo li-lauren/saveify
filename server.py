@@ -18,10 +18,12 @@ app.secret_key = SECRET_KEY
 
 @app.route('/')
 def index():
+    """Render Home Paage"""
     return render_template('index.html')
 
 @app.route('/authorize')
 def authorize():
+    """Redirect to Spotify OAuth to auntheticate a user."""
     scopes = 'playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-read-email user-read-private'
 
     spotify_authorize_url = 'https://accounts.spotify.com/authorize?'
@@ -38,6 +40,8 @@ def authorize():
 
 @app.route('/callback')
 def authorize_callback():
+    """Get user token."""
+
     code = request.args.get('code')
     
     payload = crud.getToken(code)
@@ -59,6 +63,8 @@ def authorize_callback():
 
 @app.route('/playlists')
 def getPlaylists(): 
+    """Get a list of a user's playlists."""
+    
     playlists = crud.getPlaylists(session)
 
     return playlists
