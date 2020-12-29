@@ -15,6 +15,8 @@ SPOTIFY_CLIENT_ID = os.environ['SPOTIFY_CLIENT_ID']
 SPOTIFY_SECRET = os.environ['SPOTIFY_SECRET']
 
 def getToken(code): 
+    """Get a token using the given authentication code upon Spotify sign in."""
+
     token_url = 'https://accounts.spotify.com/api/token'
     redirect_uri = 'http://0.0.0.0:5000/callback'
 
@@ -34,6 +36,8 @@ def getToken(code):
     
 
 def refreshToken(refresh_token):
+    """Refresh a user's Spotify token."""
+
     token_url = 'https://accounts.spotify.com/api/token'
 
     headers = {
@@ -54,6 +58,7 @@ def refreshToken(refresh_token):
 
 
 def checkTokenStatus(session):
+    """Check if token is expired.  If it is, refresh token."""
     
     if time.time() > session['token_expiration']:
         # token has expired, refresh token
@@ -71,6 +76,8 @@ def checkTokenStatus(session):
 
 
 def getReq(session, url, params={}):
+    """Format and perform get requests with user token."""
+
     headers = {'Authorization': f'Bearer {session["token"]}'}
     response = requests.get(url, headers=headers, params=params)
 
@@ -84,7 +91,10 @@ def getReq(session, url, params={}):
         logging.error('getReq:' + str(response.status_code))
         return None
 
+
 def getUserInfo(session):
+    """Get basic user info."""
+
     url = 'https://api.spotify.com/v1/me'
     payload = getReq(session, url)
     
@@ -95,6 +105,8 @@ def getUserInfo(session):
 
 
 def getPlaylists(session):
+    """Get a list of a user's playlists."""
+
     url = 'https://api.spotify.com/v1/me/playlists'
     payload = getReq(session, url)
 
@@ -102,6 +114,12 @@ def getPlaylists(session):
         return None
 
     return payload
+
+
+def getTracks(session):
+    """Get tracks for a playlist."""
+
+
 
 
 if __name__ == '__main__':
