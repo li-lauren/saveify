@@ -64,11 +64,19 @@ def authorize_callback():
 @app.route('/playlists')
 def getPlaylists(): 
     """Get a list of a user's playlists."""
-    
+
     playlists = crud.getPlaylists(session)
 
     return playlists
 
+
+@app.route('/tracks')
+def getTracks():
+    """Get the tracks in a playlist."""
+
+    tracks = crud.getTracks(session)
+
+    return tracks
 
 
 
