@@ -70,11 +70,11 @@ def getPlaylists():
     return playlists
 
 
-@app.route('/tracks')
-def getTracks():
+@app.route('/tracks/<playlist_id>')
+def getTracks(playlist_id):
     """Get the tracks in a playlist."""
 
-    tracks = crud.getTracks(session)
+    tracks = crud.getTracks(session, playlist_id)
 
     return tracks
 

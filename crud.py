@@ -116,8 +116,17 @@ def getPlaylists(session):
     return payload
 
 
-def getTracks(session):
+def getTracks(session, playlist_id):
     """Get tracks for a playlist."""
+
+    url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+    payload = getReq(session, url)
+
+    if payload == None:
+        return None
+
+    return payload
+
 
 
 
