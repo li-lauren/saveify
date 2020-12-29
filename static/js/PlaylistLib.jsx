@@ -20,7 +20,7 @@ const PlaylistLib = () => {
             Playlists
             { playlists.map((playlist, i) => {
                 return(
-                    <p key={i}>{playlist.name}</p>
+                    <Playlist key={i} playlist={playlist}/>
                 )
             })}
         </div>
