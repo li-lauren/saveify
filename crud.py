@@ -14,6 +14,10 @@ import time
 SPOTIFY_CLIENT_ID = os.environ['SPOTIFY_CLIENT_ID']
 SPOTIFY_SECRET = os.environ['SPOTIFY_SECRET']
 
+###########################
+###   Token Operations  ###
+###########################
+
 def getToken(code): 
     """Get a token using the given authentication code upon Spotify sign in."""
 
@@ -75,6 +79,10 @@ def checkTokenStatus(session):
     return "Success"
 
 
+#####################################
+###    General REST Operations    ###
+#####################################
+  
 def getReq(session, url, params={}):
     """Format and perform get requests with user token."""
 
@@ -91,6 +99,36 @@ def getReq(session, url, params={}):
         logging.error('getReq:' + str(response.status_code))
         return None
 
+
+def postReq(session, url, data):
+    """Format and perform post requests with user token."""
+
+    headers = {'Authorization': f'Bearer {session["token"]}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+    response = requests.post(url, headers=headers, data=data)
+
+    # 201: successful response with body
+    # 204: successful response without body
+    if response.status_code == 201:  
+        return response.json()
+    if response.status_code == 204:
+        return response
+
+    # 401 error; check if token is still valid and update if needed
+    elif response.status_code == 401 and checkTokenStatus(session) != None:
+        return postReq(session, url, data)
+    elif response.status_code == 403 or response.status_code == 404:
+        return response.status_code
+    else:
+        logging.error('postReq:' + str(response.status_code))
+        return None
+
+    
+#####################################
+###   User & Playlist Operations  ###
+#####################################
 
 def getUserInfo(session):
     """Get basic user info."""
