@@ -17,7 +17,7 @@ const PlaylistLib = () => {
 
     return(
         <div>
-            Playlists
+            <h1>Playlists</h1>
             { playlists.map((playlist, i) => {
                 return(
                     <Playlist key={i} playlist={playlist}/>
