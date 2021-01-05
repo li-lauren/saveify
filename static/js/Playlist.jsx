@@ -1,6 +1,7 @@
 const Playlist = ({playlist}) => {
     const [tracks, setTracks] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [title, setTitle] = useState('');
 
     const getTracks = () => {
         fetch(`/tracks/${playlist.id}`)
@@ -10,7 +11,15 @@ const Playlist = ({playlist}) => {
             setTracks(data.items);
         });
     };
-    
+
+    const savePlaylist = () => {
+        fetch(`/save/${playlist.id}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        });
+    };
+
     return(
         <div>
             <span onClick={getTracks}>{playlist.name}</span>  
@@ -22,16 +31,23 @@ const Playlist = ({playlist}) => {
                 
                     <form>
                         <label>Come up with a title:</label>
-                        <input type="text" placeholder="Title"/>
+                        <input 
+                            type="text" 
+                            placeholder="Title"
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                        />
                         <br/>
 
                         Choose when to save:
+                        <br/>
                         <input type="radio" name="interval" value="once"/>
                         <label>Once</label>
 
                         <input type="radio" name="interval" value="weekly"/>
                         <label>Weekly</label>
-                        <button>Save</button>
+                        <br/>
+                        <button onClick={savePlaylist}>Save</button>
                     </form>
                 </div> :
                 <div>
