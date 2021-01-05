@@ -1,7 +1,7 @@
 const App = () => {
    return(
        <div>
-           Spotify
+           Saveify
 
            <PlaylistLib />
 
