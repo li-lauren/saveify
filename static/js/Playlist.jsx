@@ -2,6 +2,7 @@ const Playlist = ({playlist}) => {
     const [tracks, setTracks] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [title, setTitle] = useState('');
+    const [interval, setInterval] = useState('once');
 
     const getTracks = () => {
         fetch(`/tracks/${playlist.id}`)
@@ -13,11 +14,25 @@ const Playlist = ({playlist}) => {
     };
 
     const savePlaylist = () => {
-        fetch(`/save/${playlist.id}`)
+        const reqOptions = {
+            method: 'POST', 
+            headers: {'Content-Type' : 'application/json'}, 
+            body: JSON.stringify({
+                'title': title, 
+                'interval': interval,
+                'playlist_id': playlist.id
+            })
+        };
+
+        fetch('/save', reqOptions)
         .then(res => res.json())
         .then(data => {
             console.log(data)
         });
+    };
+
+    const handleRadio = e => {
+        setInterval(e.target.value);
     };
 
     return(
@@ -41,10 +56,20 @@ const Playlist = ({playlist}) => {
 
                         Choose when to save:
                         <br/>
-                        <input type="radio" name="interval" value="once"/>
+                        <input 
+                            type="radio" 
+                            name="interval" 
+                            value="once" 
+                            onClick={handleRadio}
+                        />
                         <label>Once</label>
 
-                        <input type="radio" name="interval" value="weekly"/>
+                        <input 
+                            type="radio" 
+                            name="interval" 
+                            value="weekly" 
+                            onClick={handleRadio}
+                        />
                         <label>Weekly</label>
                         <br/>
                         <button onClick={savePlaylist}>Save</button>
