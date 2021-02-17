@@ -79,6 +79,23 @@ def getTracks(playlist_id):
     return tracks
 
 
+@app.route('/save', methods=['POST'])
+def savePlaylist():
+    """Save a playlist as a new playlist and update."""
+
+    title = request.json.get('title')
+    interval = request.json.get('interval')
+    playlist_id = request.json.get('playlist_id')
+
+    print(title, interval, playlist_id)
+
+
+@app.cli.command()
+def scheduled():
+    """Test scheduled task."""
+    print('Running test')
+
+
 
 
 if __name__ == '__main__':
