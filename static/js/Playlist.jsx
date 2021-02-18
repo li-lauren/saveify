@@ -13,7 +13,9 @@ const Playlist = ({playlist}) => {
         });
     };
 
-    const savePlaylist = () => {
+    const savePlaylist = e => {
+        e.preventDefault();
+        
         const reqOptions = {
             method: 'POST', 
             headers: {'Content-Type' : 'application/json'}, 

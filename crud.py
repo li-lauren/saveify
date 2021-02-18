@@ -7,6 +7,7 @@ import base64
 import requests
 import logging
 import time
+import json
 
 # Ref: https://medium.com/analytics-vidhya/discoverdaily-a-flask-web-application-built-with-the-spotify-api-and-deployed-on-google-cloud-6c046e6e731b
 
@@ -166,6 +167,21 @@ def getTracks(session, playlist_id):
     return payload
 
 
+def createPlaylist(session, playlist_name):
+    """Create a new playlist."""
+    
+    user_id = session['user_id']
+    url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+    data = {'name': playlist_name}
+
+    payload = postReq(session, url, json.dumps(data))
+
+    if payload == None:
+        return None
+
+    return payload
+
+
 def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
     """Store a record of what playlists should be saved."""
 
@@ -181,6 +197,33 @@ def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
 
     return savedPlaylist
 
+
+def addTracksToPlaylist(session, playlist_id, track_uris):
+    """Add tracks to a playlist."""
+
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
+    data = track_uris
+
+    payload = postReq(session, url, data)
+
+    if payload == None: 
+        return None
+    
+    return payload
+
+
+def updatePlaylist(session, orig_playlist_id, saved_playlist_id):
+    """Update a playlist by copying over songs from another playlist."""
+
+    tracks = getTracks(session, orig_playlist_id)
+
+    track_uris = {"uris": []}
+
+    for track in tracks['items']: 
+        track_uris["uris"].append(track["track"]["uri"])
+
+    return addTracksToPlaylist(session, saved_playlist_id, json.dumps(track_uris))
+    
 
 
 if __name__ == '__main__':

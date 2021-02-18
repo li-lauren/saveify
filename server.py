@@ -83,11 +83,26 @@ def getTracks(playlist_id):
 def savePlaylist():
     """Save a playlist as a new playlist and update."""
 
+    # get user form info
     title = request.json.get('title')
     interval = request.json.get('interval')
-    playlist_id = request.json.get('playlist_id')
+    orig_playlist_id = request.json.get('playlist_id')
 
-    print(title, interval, playlist_id)
+    # create a new playlist
+    new_playlist = crud.createPlaylist(session, title)
+
+    new_playlist_id = new_playlist['id']
+
+    user_id = session['user_id']
+
+    # store playlist in DB
+    savedPlaylist = crud.storeSavedPlaylist(user_id, orig_playlist_id, 
+        new_playlist_id, interval)
+    
+    # copy over tracks in original playlist to the new playlist
+    snapshot_id = crud.updatePlaylist(session, orig_playlist_id, new_playlist_id)
+
+    return snapshot_id
 
 
 @app.cli.command()
