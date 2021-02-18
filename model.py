@@ -7,6 +7,7 @@ db = SQLAlchemy()
 
 @dataclass
 class SavedPlaylist(db.Model):
+    savedPlaylist_id: int
     user_id: str
     orig_playlist_id: str
     saved_playlist_id: str
@@ -14,7 +15,8 @@ class SavedPlaylist(db.Model):
 
     __tablename__ = "savedPlaylists"
 
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    savedPlaylist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.String, nullable=False)
     orig_playlist_id = db.Column(db.String, nullable=False)
     saved_playlist_id = db.Column(db.String, nullable=False)
     interval = db.Column(db.String, nullable=False)

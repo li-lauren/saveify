@@ -186,7 +186,7 @@ def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
     """Store a record of what playlists should be saved."""
 
     savedPlaylist = SavedPlaylist(
-        user_id = user_id,
+        user_id = str(user_id),
         orig_playlist_id = orig_playlist_id,
         saved_playlist_id = saved_playlist_id,
         interval = interval
