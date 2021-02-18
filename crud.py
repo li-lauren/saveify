@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, connect_to_db
+from model import db, connect_to_db, SavedPlaylist
 
 import os
 import base64
@@ -166,6 +166,20 @@ def getTracks(session, playlist_id):
     return payload
 
 
+def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
+    """Store a record of what playlists should be saved."""
+
+    savedPlaylist = SavedPlaylist(
+        user_id = user_id,
+        orig_playlist_id = orig_playlist_id,
+        saved_playlist_id = saved_playlist_id,
+        interval = interval
+    )
+
+    db.session.add(savedPlaylist)
+    db.session.commit()
+
+    return savedPlaylist
 
 
 
