@@ -1,21 +1,25 @@
 const Playlist = ({playlist}) => {
     const [tracks, setTracks] = useState([]);
+    const [showTracks, setShowTracks] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [title, setTitle] = useState('');
     const [interval, setInterval] = useState('once');
 
     const getTracks = () => {
-        fetch(`/tracks/${playlist.id}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data.items);
-            setTracks(data.items);
-        });
+        setShowTracks(!showTracks)
+        if (showTracks) {
+            fetch(`/tracks/${playlist.id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.items);
+                setTracks(data.items);
+            });
+        }
     };
 
     const savePlaylist = e => {
         e.preventDefault();
-        
+
         const reqOptions = {
             method: 'POST', 
             headers: {'Content-Type' : 'application/json'}, 
@@ -40,7 +44,7 @@ const Playlist = ({playlist}) => {
     return(
         <div>
             <span onClick={getTracks}>{playlist.name}</span>  
-            {tracks.map((track, i) => <p key={i}>{track.track.name}</p>)}
+            {showTracks ? tracks.map((track, i) => <p key={i}>{track.track.name}</p>) : ''}
             {
                 showForm ? 
                 <div>
