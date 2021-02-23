@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify, make_response)
 
 import os
-from model import connect_to_db
+from model import connect_to_db, SavedPlaylist
 import crud
 
 import urllib
@@ -108,6 +108,8 @@ def savePlaylist():
 @app.cli.command()
 def scheduled():
     """Test scheduled task."""
+    connect_to_db(app)
+    print(crud.getWeeklySavedPlaylists())
     print('Running test')
 
 

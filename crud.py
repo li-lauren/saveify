@@ -198,6 +198,14 @@ def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
     return savedPlaylist
 
 
+def getWeeklySavedPlaylists():
+    """Get all playlists requiring weekly updates."""
+
+    playlists = SavedPlaylist.query.filter(SavedPlaylist.interval == "weekly").all()
+   
+    return playlists 
+
+
 def addTracksToPlaylist(session, playlist_id, track_uris):
     """Add tracks to a playlist."""
 
