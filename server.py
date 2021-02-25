@@ -104,12 +104,23 @@ def savePlaylist():
 
     return snapshot_id
 
+@app.route('/update', methods=['POST'])
+def updatePlaylist():
+    """Update a saved playlist."""
+
+    orig_playlist_id = request.json.get('orig_playlist_id')
+    new_playlist_id = request.json.get('new_playlist_id')
+    snapshot_id = crud.updatePlaylist(session, orig_playlist_id, new_playlist_id)
+
+    return snapshot_id
+
 
 @app.cli.command()
 def scheduled():
     """Test scheduled task."""
     connect_to_db(app)
     print(crud.getWeeklySavedPlaylists())
+    print(session)
     print('Running test')
 
 

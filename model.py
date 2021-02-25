@@ -25,7 +25,7 @@ class SavedPlaylist(db.Model):
         return f'<SavedPlaylist id={self.saved_playlist_id} user_id={self.user_id}>'
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///spotify_db', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///spotify_db', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
