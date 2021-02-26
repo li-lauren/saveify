@@ -1,0 +1,2 @@
+docker build --tag python-docker .    
+docker run -e SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID -e SECRET_KEY=$SECRET_KEY -e SPOTIFY_SECRET=$SPOTIFY_SECRET -e FLASK_APP=$FLASK_APP python-docker
