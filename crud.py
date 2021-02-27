@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, connect_to_db, SavedPlaylist
+from model import db, connect_to_db, SavedPlaylist, User
 
 import os
 import base64
@@ -143,6 +143,30 @@ def getUserInfo(session):
     return payload
 
 
+def getUserFromDB(spotify_id):
+    """Get user from the database."""
+
+    user = User.query.filter(User.spotify_id == spotify_id).first()
+
+    return user
+
+
+def createUser(spotify_id, session):
+    """Create a user."""
+
+    user = User(
+        spotify_id = spotify_id,
+        access_token = session['token'],
+        refresh_token = session['refresh_token'],
+        expiration = session['token_expiration'],
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    return user
+
+
 def getPlaylists(session):
     """Get a list of a user's playlists."""
 
@@ -171,7 +195,8 @@ def createPlaylist(session, playlist_name):
     """Create a new playlist."""
     
     user_id = session['user_id']
-    url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+    user = User.query.get(user_id)
+    url = f'https://api.spotify.com/v1/users/{user.spotify_id}/playlists'
     data = {'name': playlist_name}
 
     payload = postReq(session, url, json.dumps(data))
@@ -182,14 +207,15 @@ def createPlaylist(session, playlist_name):
     return payload
 
 
-def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval):
+def storeSavedPlaylist(user_id, orig_playlist_id, saved_playlist_id, interval, title):
     """Store a record of what playlists should be saved."""
 
     savedPlaylist = SavedPlaylist(
-        user_id = str(user_id),
+        user_id = int(user_id),
         orig_playlist_id = orig_playlist_id,
         saved_playlist_id = saved_playlist_id,
-        interval = interval
+        interval = interval,
+        title = title
     )
 
     db.session.add(savedPlaylist)

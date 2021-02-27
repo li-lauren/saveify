@@ -53,9 +53,15 @@ def authorize_callback():
         #error
         print('Token access failed')
 
-    user = crud.getUserInfo(session)
-    session['user_id'] = user['id']
-    logging.info('new user:' + session['user_id'])
+    userInfo = crud.getUserInfo(session)
+    spotify_id = userInfo['id']
+    user = crud.getUserFromDB(spotify_id)
+
+    if not user:
+        user = crud.createUser(spotify_id, session)
+    
+    session['user_id'] = user.user_id
+    logging.info('new user:' + str(session['user_id']))
     print(session['user_id'])
 
     return redirect('/')
@@ -97,12 +103,14 @@ def savePlaylist():
 
     # store playlist in DB
     savedPlaylist = crud.storeSavedPlaylist(user_id, orig_playlist_id, 
-        new_playlist_id, interval)
+        new_playlist_id, interval, title)
+    print(savedPlaylist)
     
     # copy over tracks in original playlist to the new playlist
     snapshot_id = crud.updatePlaylist(session, orig_playlist_id, new_playlist_id)
 
     return snapshot_id
+
 
 @app.route('/update', methods=['POST'])
 def updatePlaylist():

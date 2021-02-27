@@ -11,6 +11,7 @@ class User(db.Model):
     access_token: str
     refresh_token: str
     expiration: str
+    spotify_id: str
 
     __tablename__ = "users"
 
@@ -18,6 +19,7 @@ class User(db.Model):
     access_token = db.Column(db.String, nullable=False)
     refresh_token = db.Column(db.String, nullable=False)
     expiration = db.Column(db.String, nullable=False)
+    spotify_id = db.Column(db.String, nullable=False)
 
     def __repr__(self):
         return f'<User id={self.user_id} access={self.access_token}'
@@ -27,7 +29,6 @@ class User(db.Model):
 class SavedPlaylist(db.Model):
     savedPlaylist_id: int
     user_id: int
-    spotify_id: str
     orig_playlist_id: str
     saved_playlist_id: str
     interval: str
@@ -37,7 +38,6 @@ class SavedPlaylist(db.Model):
 
     savedPlaylist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    spotify_id = db.Column(db.String, nullable=False)
     orig_playlist_id = db.Column(db.String, nullable=False)
     saved_playlist_id = db.Column(db.String, nullable=False)
     interval = db.Column(db.String, nullable=False)
