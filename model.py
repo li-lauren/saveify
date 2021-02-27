@@ -6,23 +6,45 @@ from dataclasses import dataclass
 db = SQLAlchemy()
 
 @dataclass
+class User(db.Model):
+    user_id: int
+    access_token: str
+    refresh_token: str
+    expiration: str
+
+    __tablename__ = "users"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    access_token = db.Column(db.String, nullable=False)
+    refresh_token = db.Column(db.String, nullable=False)
+    expiration = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return f'<User id={self.user_id} access={self.access_token}'
+
+
+@dataclass
 class SavedPlaylist(db.Model):
     savedPlaylist_id: int
-    user_id: str
+    user_id: int
+    spotify_id: str
     orig_playlist_id: str
     saved_playlist_id: str
     interval: str
+    title: str
 
     __tablename__ = "savedPlaylists"
 
     savedPlaylist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    spotify_id = db.Column(db.String, nullable=False)
     orig_playlist_id = db.Column(db.String, nullable=False)
     saved_playlist_id = db.Column(db.String, nullable=False)
     interval = db.Column(db.String, nullable=False)
+    title = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return f'<SavedPlaylist id={self.saved_playlist_id} user_id={self.user_id}>'
+        return f'<SavedPlaylist title={self.title} user_id={self.user_id}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///spotify_db', echo=False):
