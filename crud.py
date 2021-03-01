@@ -167,6 +167,12 @@ def createUser(spotify_id, session):
     return user
 
 
+def getAllUsers():
+    """Return all users."""
+
+    return User.query.all()
+
+    
 def getPlaylists(session):
     """Get a list of a user's playlists."""
 
@@ -257,8 +263,20 @@ def updatePlaylist(session, orig_playlist_id, saved_playlist_id):
         track_uris["uris"].append(track["track"]["uri"])
 
     return addTracksToPlaylist(session, saved_playlist_id, json.dumps(track_uris))
-    
 
+
+def getSavedPlaylistsAndUsers(interval):
+    """Get all token and playlist id information for each saved playlist."""
+
+    tokenIdInfo = db.session.query(User.access_token, User.refresh_token, 
+                User.expiration, SavedPlaylist.orig_playlist_id, 
+                SavedPlaylist.saved_playlist_id).\
+                join(User, SavedPlaylist.user_id == User.user_id).\
+                filter(SavedPlaylist.interval == interval).all()
+
+    return tokenIdInfo
+
+    
 
 if __name__ == '__main__':
     from server import app

@@ -127,8 +127,20 @@ def updatePlaylist():
 def scheduled():
     """Test scheduled task."""
     connect_to_db(app)
-    print(crud.getWeeklySavedPlaylists())
-    print(session)
+    print(crud.getSavedPlaylistsAndUsers("weekly"))
+    
+    h = {}
+
+    for i in crud.getSavedPlaylistsAndUsers("weekly"):
+        h['token'] = i[0]
+        h['refresh_token'] = i[1]
+        h['token_expiration'] = float(i[2])
+
+        orig_playlist_id = i[3]
+        saved_playlist_id = i[4]
+
+        crud.updatePlaylist(h, orig_playlist_id, saved_playlist_id)
+
     print('Running test')
 
 
