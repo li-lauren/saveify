@@ -65,7 +65,7 @@ def refreshToken(refresh_token):
 def checkTokenStatus(session):
     """Check if token is expired.  If it is, refresh token."""
     
-    if time.time() > session['token_expiration']:
+    if time.time() > float(session['token_expiration']):
         # token has expired, refresh token
         payload = refreshToken(session['refresh_token'])
 
