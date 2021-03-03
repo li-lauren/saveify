@@ -86,7 +86,7 @@ class FlaskTests(unittest.TestCase):
         json=body,
         follow_redirects=True
         )
-
+        self.assertEqual(result.status_code, 200)
         self.assertIn(b'snapshot_id', result.data)
 
 
