@@ -66,6 +66,15 @@ def authorize_callback():
 
     return redirect('/')
 
+@app.route('/user')
+def getUser():
+    """Check if a user is authenticated."""
+
+    if 'token' in session:
+        return "Authenticated"
+    else:
+        return "Unauthenticated"
+
 
 @app.route('/playlists')
 def getPlaylists(): 
