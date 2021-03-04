@@ -20,7 +20,7 @@ const App = () => {
     return(
        <div>
            Saveify
-            {auth ? <PlaylistLib /> : ''}
+            {auth ? <PlaylistLib /> : <Login setAuth={setAuth} />}
            
 
        </div>
