@@ -42,7 +42,7 @@ const Playlist = ({playlist}) => {
     };
 
     return(
-        <div>
+        <div className="playlist-cont">
             <span onClick={getTracks}>{playlist.name}</span>  
             {showTracks ? tracks.map((track, i) => <p key={i}>{track.track.name}</p>) : ''}
             {
@@ -82,7 +82,8 @@ const Playlist = ({playlist}) => {
                     </form>
                 </div> :
                 <div>
-                    <button onClick={() => setShowForm(true)}>Save</button>
+                    <button type="button" className="btn btn-light btn-sm" 
+                    onClick={() => setShowForm(true)}>Save</button>
                 </div>
             }
         </div>

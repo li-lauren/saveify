@@ -1,0 +1,7 @@
+.playlist-cont:hover{
+    border-bottom: 2px rgba(0, 0, 0, .5) solid;
+}
+
+.playlist-cont {
+    padding: 10px; 
+}
