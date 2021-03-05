@@ -51,10 +51,13 @@ class FlaskTests(unittest.TestCase):
     def test_auth(self):
         """Test redirection to Spotify OAuth."""
 
-        # expectedPath = 'https://accounts.spotify.com/authorize?'
+        expectedPath = 'https://accounts.spotify.com/authorize?'
         result = self.client.get("/authorize")
         self.assertEqual(result.status_code, 302)
-        # self.assertIn(expectedPath, urlparse(result.location).path)
+        redirectURL = urlparse(result.location)
+        self.assertEqual("/authorize", redirectURL.path)
+        self.assertEqual("accounts.spotify.com", redirectURL.hostname)
+        self.assertEqual("https", redirectURL.scheme)
 
     @vcr.use_cassette('fixtures/vcr_cassettes/google_test.yaml')
     def test_google(self):
@@ -68,8 +71,12 @@ class FlaskTests(unittest.TestCase):
         """Test getting a list of a user's playlists from Spotify API."""
 
         result = self.client.get("/playlists")
+
         self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.headers.get('Content-Type'), 'application/json')
+        data = json.loads(result.data)
         self.assertIn(b'Discover Weekly', result.data)
+
         # response = crud.getPlaylists(self.client.session_transaction())
         # self.assertEqual(response.status_code, 200)
 
