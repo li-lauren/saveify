@@ -31,7 +31,8 @@ def authorize():
         'response_type': 'code', 
         'client_id': SPOTIFY_CLIENT_ID,
         'redirect_uri': 'http://0.0.0.0:5000/callback',
-        'scope': scopes
+        'scope': scopes, 
+        'show_dialog': True
     }
 
     query_params = urllib.parse.urlencode(params)
@@ -65,6 +66,17 @@ def authorize_callback():
     print(session['user_id'])
 
     return redirect('/')
+
+
+@app.route('/logout')
+def logout():
+    """Disconnect user from Spotify."""
+
+    session.clear()
+    crud.logout()
+    
+    return "Logout Success"
+
 
 @app.route('/user')
 def getUser():

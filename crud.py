@@ -276,7 +276,14 @@ def getSavedPlaylistsAndUsers(interval):
 
     return tokenIdInfo
 
-    
+
+def logout():
+    """Logout of Spotify"""
+
+    url =  "https://accounts.spotify.com/en/logout"
+    response = requests.get(url)
+
+    return response
 
 if __name__ == '__main__':
     from server import app
