@@ -73,7 +73,12 @@ class FlaskTests(unittest.TestCase):
     hidden_headers = [('Authorization', 'XXXX')]
     hidden_params = [('refresh_token', 'XXXX'), ('client_id', 'XXXX'), ('client_secret', 'XXXX')]
 
-    @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml', filter_headers=hidden_headers, filter_post_data_parameters=hidden_params)
+    filters = {
+        'filter_headers': hidden_headers,
+        'filter_post_data_parameters': hidden_params
+    }
+
+    @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml', **filters)
     def test_get_playlists(self):
         """Test getting a list of a user's playlists from Spotify API."""
 
@@ -87,7 +92,7 @@ class FlaskTests(unittest.TestCase):
         # response = crud.getPlaylists(self.client.session_transaction())
         # self.assertEqual(response.status_code, 200)
 
-    @vcr.use_cassette('fixtures/vcr_cassettes/save_playlist_test.yaml', filter_headers=hidden_headers, filter_post_data_parameters=hidden_params)
+    @vcr.use_cassette('fixtures/vcr_cassettes/save_playlist_test.yaml', **filters)
     def test_save_playlist(self):
         """Test saving a playlist and copying over initial tracks."""
 
