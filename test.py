@@ -69,23 +69,25 @@ class FlaskTests(unittest.TestCase):
         response = requests.get('https://google.com')
         self.assertEqual(response.status_code, 200)
 
-    # @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml')
-    with my_vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml', 
-        filter_headers=['Authorization']):
-        def test_get_playlists(self):
-            """Test getting a list of a user's playlists from Spotify API."""
+    # Define sensitive information
+    hidden_headers = [('Authorization', 'XXXX')]
+    hidden_params = [('refresh_token', 'XXXX'), ('client_id', 'XXXX'), ('client_secret', 'XXXX')]
 
-            result = self.client.get("/playlists")
+    @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml', filter_headers=hidden_headers, filter_post_data_parameters=hidden_params)
+    def test_get_playlists(self):
+        """Test getting a list of a user's playlists from Spotify API."""
 
-            self.assertEqual(result.status_code, 200)
-            self.assertEqual(result.headers.get('Content-Type'), 'application/json')
-            data = json.loads(result.data)
-            self.assertIn(b'Discover Weekly', result.data)
+        result = self.client.get("/playlists")
 
-            # response = crud.getPlaylists(self.client.session_transaction())
-            # self.assertEqual(response.status_code, 200)
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.headers.get('Content-Type'), 'application/json')
+        data = json.loads(result.data)
+        self.assertIn(b'Discover Weekly', result.data)
 
-    @vcr.use_cassette('fixtures/vcr_cassettes/save_playlist_test.yaml')
+        # response = crud.getPlaylists(self.client.session_transaction())
+        # self.assertEqual(response.status_code, 200)
+
+    @vcr.use_cassette('fixtures/vcr_cassettes/save_playlist_test.yaml', filter_headers=hidden_headers, filter_post_data_parameters=hidden_params)
     def test_save_playlist(self):
         """Test saving a playlist and copying over initial tracks."""
 
