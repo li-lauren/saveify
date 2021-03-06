@@ -13,6 +13,9 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 REFRESH_TOKEN = os.environ['REFRESH_TOKEN']
 EXPIRATION = os.environ['EXPIRATION']
 
+my_vcr = vcr.VCR()
+
+
 class FlaskTests(unittest.TestCase):
 
     def setUp(self):
@@ -66,19 +69,21 @@ class FlaskTests(unittest.TestCase):
         response = requests.get('https://google.com')
         self.assertEqual(response.status_code, 200)
 
-    @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml')
-    def test_get_playlists(self):
-        """Test getting a list of a user's playlists from Spotify API."""
+    # @vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml')
+    with my_vcr.use_cassette('fixtures/vcr_cassettes/get_playlists_test.yaml', 
+        filter_headers=['Authorization']):
+        def test_get_playlists(self):
+            """Test getting a list of a user's playlists from Spotify API."""
 
-        result = self.client.get("/playlists")
+            result = self.client.get("/playlists")
 
-        self.assertEqual(result.status_code, 200)
-        self.assertEqual(result.headers.get('Content-Type'), 'application/json')
-        data = json.loads(result.data)
-        self.assertIn(b'Discover Weekly', result.data)
+            self.assertEqual(result.status_code, 200)
+            self.assertEqual(result.headers.get('Content-Type'), 'application/json')
+            data = json.loads(result.data)
+            self.assertIn(b'Discover Weekly', result.data)
 
-        # response = crud.getPlaylists(self.client.session_transaction())
-        # self.assertEqual(response.status_code, 200)
+            # response = crud.getPlaylists(self.client.session_transaction())
+            # self.assertEqual(response.status_code, 200)
 
     @vcr.use_cassette('fixtures/vcr_cassettes/save_playlist_test.yaml')
     def test_save_playlist(self):
