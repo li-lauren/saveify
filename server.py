@@ -92,9 +92,23 @@ def getUser():
 def getPlaylists(): 
     """Get a list of a user's playlists."""
 
-    playlists = crud.getPlaylists(session)
+    allPlaylistData = []
 
-    return playlists
+    spotifyPlaylistData = crud.getPlaylists(session)
+    if 'items' in spotifyPlaylistData:
+        allPlaylistData = spotifyPlaylistData['items']
+    
+    savedPlaylistIDs = crud.getSavedPlaylistIDsByUser(int(session['user_id']))
+
+    regPlaylistData = [i for i in allPlaylistData if i['id'] not in savedPlaylistIDs]
+    savedPlaylistData = [i for i in allPlaylistData if i['id'] in savedPlaylistIDs]
+
+    data = {
+        'regPlaylistData': regPlaylistData,
+        'savedPlaylistData': savedPlaylistData
+    }
+    
+    return data
 
 
 @app.route('/tracks/<playlist_id>')

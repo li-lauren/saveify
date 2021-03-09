@@ -277,13 +277,13 @@ def getSavedPlaylistsAndUsers(interval):
     return tokenIdInfo
 
 
-def getSavedPlaylistsByUser(user_id):
-    """Get all of a user's saved playlists."""
+def getSavedPlaylistIDsByUser(user_id):
+    """Get a set of a user's saved playlist IDs."""
 
     playlists = db.session.query(SavedPlaylist.saved_playlist_id).\
         filter(SavedPlaylist.user_id == user_id).all()
 
-    return [x[0] for x in playlists]
+    return {x[0] for x in playlists}
 
 
 def logout():

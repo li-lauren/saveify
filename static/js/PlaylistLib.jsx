@@ -1,13 +1,17 @@
 const PlaylistLib = () => {
-    const [playlists, setPlaylists] = useState([]);
+    const [regPlaylists, setRegPlaylists] = useState([]);
+    const [savedPlaylists, setSavedPlaylists] = useState([]);
 
     const getPlaylists = () => {
         fetch('/playlists')
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            console.log(data.items);
-            setPlaylists(data.items);    
+            
+            setRegPlaylists(data.regPlaylistData);  
+            setSavedPlaylists(data.savedPlaylistData);
+
+            console.log(`SAVED PLAYLISTS ${savedPlaylists}`)
         });
     }
 
@@ -17,12 +21,14 @@ const PlaylistLib = () => {
 
     return(
         <div>
-            <h1>Playlists</h1>
-            { playlists.map((playlist, i) => {
+            <h1>Spotify Playlists</h1>
+            { regPlaylists.map((playlist, i) => {
                 return(
                     <Playlist key={i} playlist={playlist}/>
                 )
             })}
+
+            <h1>Saveify Playlists</h1>
         </div>
     )
 }
