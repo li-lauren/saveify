@@ -22,13 +22,12 @@ const PlaylistLib = () => {
     return(
         <div>
             <h1>Spotify Playlists</h1>
-            { regPlaylists.map((playlist, i) => {
-                return(
-                    <Playlist key={i} playlist={playlist}/>
-                )
-            })}
+            { regPlaylists.map((playlist, i) => 
+                <Playlist key={i} playlist={playlist}/>)}
 
             <h1>Saveify Playlists</h1>
+            { savedPlaylists.map((playlist, i) => 
+                <SavedPlaylist key={i} playlist={playlist}/>)}
         </div>
     )
 }
