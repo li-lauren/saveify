@@ -16,6 +16,11 @@ const SavedPlaylist = ({playlist}) => {
 
     return (
         <div className="saved-playlist-cont">
+            <img 
+                src={playlist.images[0].url} 
+                alt={playlist.name} 
+                className="pl-cover"
+            />
             <span onClick={getTracks}>
                 {playlist.name}
             </span>  
