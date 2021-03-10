@@ -22,14 +22,16 @@ const PlaylistLib = () => {
     const regPlaylistComps = regPlaylists.map((playlist, i) =>
         <Playlist key={i} playlist={playlist} />)
 
+    const savedPlaylistComps = savedPlaylists.map((playlist, i) => 
+        <SavedPlaylist key={i} playlist={playlist}/>)
+
     return(
         <div>
             <h1>Spotify Playlists</h1>
             <PlaylistCarousel playlists={regPlaylistComps} n={4} />
 
             <h1>Saveify Playlists</h1>
-            { savedPlaylists.map((playlist, i) => 
-                <SavedPlaylist key={i} playlist={playlist}/>)}
+            <PlaylistCarousel playlists={savedPlaylistComps} n={4} />
         </div>
     )
 }

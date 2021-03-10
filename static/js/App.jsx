@@ -29,7 +29,7 @@ const App = () => {
 
     return(
        <div>
-            <h2>Saveify</h2>
+            <h1>Saveify</h1>
             {auth ?
                 <button 
                     type="button" 

@@ -3,10 +3,22 @@
 }
 
 .playlist-cont {
+    display: flex;
+    flex-direction: column; 
     padding: 10px; 
+}
+
+.saved-playlist-cont {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
 .pl-cover {
    width: 160px;
    height: 160px; 
+}
+
+.carousel {
+    display: flex;
 }

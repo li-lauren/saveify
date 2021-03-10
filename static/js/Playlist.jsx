@@ -43,6 +43,15 @@ const Playlist = ({playlist}) => {
 
     return(
         <div className="playlist-cont">
+            {
+                playlist.images.length > 0 ? 
+                <img 
+                    src={playlist.images[0].url} 
+                    alt={playlist.name} 
+                    className="pl-cover"
+                /> : ''
+            }
+            
             <span onClick={getTracks}>{playlist.name}</span>  
             {showTracks ? tracks.map((track, i) => <p key={i}>{track.track.name}</p>) : ''}
             {
