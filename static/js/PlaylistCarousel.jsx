@@ -23,11 +23,24 @@ const PlaylistCarousel = ({playlists, n}) => {
     return(
         <div className="carousel">
             {
-                hidePrev ? '' : <button onClick={showPrevPL}>Prev</button>
+                hidePrev ? '' : 
+                <button 
+                    className="btn btn-sm"
+                    onClick={showPrevPL}>
+                    &larr;
+                </button>
             }
-            {playlists.slice(pos, pos + n)}
+            <div className="carousel-slides">
+                {playlists.slice(pos, pos + n)}
+            </div>
+            
             {
-                hideNext ? '' :  <button onClick={showNextPL}>Next</button>
+                hideNext ? '' :  
+                <button 
+                    className="btn btn-sm"
+                    onClick={showNextPL}>
+                    &rarr;
+                </button>
             }
         </div>
     )

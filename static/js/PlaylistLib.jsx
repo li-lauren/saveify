@@ -26,12 +26,16 @@ const PlaylistLib = () => {
         <SavedPlaylist key={i} playlist={playlist}/>)
 
     return(
-        <div>
+        <div className="container">
             <h1>Spotify Playlists</h1>
-            <PlaylistCarousel playlists={regPlaylistComps} n={4} />
+            <div id="spotify-pl-cont">
+                <PlaylistCarousel playlists={regPlaylistComps} n={4} />
+            </div>
 
             <h1>Saveify Playlists</h1>
-            <PlaylistCarousel playlists={savedPlaylistComps} n={4} />
+            <div id="saveify-pl-cont">
+                <PlaylistCarousel playlists={savedPlaylistComps} n={4} />
+            </div>
         </div>
     )
 }

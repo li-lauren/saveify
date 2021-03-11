@@ -1,7 +1,6 @@
-const SavePlaylistForm = ({playlistID}) => {
+const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
     const [title, setTitle] = useState('');
     const [interval, setInterval] = useState('once');
-    const [showForm, setShowForm] = useState(false);
 
     const savePlaylist = e => {
         e.preventDefault();
@@ -26,7 +25,7 @@ const SavePlaylistForm = ({playlistID}) => {
     const handleRadio = e => setInterval(e.target.value);
 
     return (
-        <div>
+        <div className="save-cont">
             {
                 showForm ? 
                 <div>
@@ -35,14 +34,17 @@ const SavePlaylistForm = ({playlistID}) => {
                     </button>
                 
                     <form>
-                        <label>Come up with a title:</label>
-                        <input 
-                            type="text" 
-                            placeholder="Title"
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                        />
-                        <br/>
+                        <div className="form-group">
+                            <label>Playlist name:</label>
+                            <input 
+                                className="form-control"
+                                type="text" 
+                                placeholder="Name"
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
+                            />
+                        </div>
+                
 
                         Choose when to save:
                         <br/>
@@ -64,11 +66,7 @@ const SavePlaylistForm = ({playlistID}) => {
                         <br/>
                         <button onClick={savePlaylist}>Save</button>
                     </form>
-                </div> :
-                <div>
-                    <button type="button" className="btn btn-light btn-sm" 
-                    onClick={() => setShowForm(true)}>Save</button>
-                </div>
+                </div> : ''
             }
         </div>
     )
