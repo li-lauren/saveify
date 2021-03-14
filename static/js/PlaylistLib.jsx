@@ -22,8 +22,8 @@ const PlaylistLib = () => {
     const regPlaylistComps = regPlaylists.map((playlist, i) =>
         <Playlist key={i} playlist={playlist} />)
 
-    const savedPlaylistComps = savedPlaylists.map((playlist, i) => 
-        <SavedPlaylist key={i} playlist={playlist}/>)
+    // const savedPlaylistComps = savedPlaylists.map((playlist, i) => 
+    //     <SavedPlaylist key={i} playlist={playlist}/>)
 
     return(
         <div className="container">
@@ -33,10 +33,12 @@ const PlaylistLib = () => {
                 <PlaylistCarousel playlists={regPlaylistComps} n={4} />
             </div>
 
-            <h1>SAVED</h1>
-            <div id="saveify-pl-cont">
-                <PlaylistCarousel playlists={savedPlaylistComps} n={4} />
-            </div>
+            <h1>SAVED</h1> 
+            {
+                savedPlaylists.length > 0 ? 
+                <PlaylistScrollBox playlists={savedPlaylists} /> : ''
+            }    
+            
         </div>
     )
 }

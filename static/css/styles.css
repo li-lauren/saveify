@@ -12,9 +12,9 @@
     justify-content: space-around;
 }
 
-.carousel-slides div:nth-child(2n) {
+/* .carousel-slides div:nth-child(2n) {
     margin-top: -50px;
-}
+} */
 
 
 .playlist-cont {
@@ -77,3 +77,28 @@
     font-size: 100px;
     margin-bottom: -120px;
 }
+
+/* SAVED PLAYLISTS + TRACKS */
+
+.saved-section {
+    display: flex;
+    max-height: 40%;
+}
+
+#tracks-container {
+    margin-bottom: 10px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scroll-box {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    /* max-height: 100px; */
+    margin-bottom: 10px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
+}
+
