@@ -27,12 +27,13 @@ const PlaylistLib = () => {
 
     return(
         <div className="container">
-            <h1>Spotify Playlists</h1>
+            <h1 id="pl-h-top">Your</h1>
+            <h1 id="pl-h">Playlists</h1>
             <div id="spotify-pl-cont">
                 <PlaylistCarousel playlists={regPlaylistComps} n={4} />
             </div>
 
-            <h1>Saveify Playlists</h1>
+            <h1>SAVED</h1>
             <div id="saveify-pl-cont">
                 <PlaylistCarousel playlists={savedPlaylistComps} n={4} />
             </div>
