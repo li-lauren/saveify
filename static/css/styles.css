@@ -113,17 +113,38 @@
 .saved-section {
     display: flex;
     max-height: 30%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
-#tracks-container {
+.tracks-container {
     flex-grow: 2;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .scroll-box {
     flex-grow: 1;
     overflow: scroll;
     flex-direction: column;
+    overflow-x: hidden;
+    align-items: flex-end;
 }
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+
 

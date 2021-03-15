@@ -21,12 +21,12 @@ const PlaylistScrollBox = ({playlists}) => {
 
     return(
         <div className="saved-section">
-            <div id="tracks-container">
+            <div className="tracks-container">
                 {
                     tracks.map((track, i) => <p key={i}>{track.track.name}</p>) 
                 }
             </div>
-            <div className="scroll-box">
+            <div className="f scroll-box">
            
                 {playlists.map((playlist, i) => 
                     <SavedPlaylist 
