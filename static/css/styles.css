@@ -5,6 +5,7 @@
 .app {
     flex-direction: column;
     width: 75%;
+    height: 100vh;
     margin: auto;
 }
 
@@ -112,23 +113,17 @@
 .saved-section {
     display: flex;
     max-height: 30%;
+    overflow: hidden;
 }
 
 #tracks-container {
     flex-grow: 2;
-    margin-bottom: 10px;
     overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 
 .scroll-box {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    /* max-height: 100px; */
-    margin-bottom: 10px;
+    flex-grow: 1;
     overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-
+    flex-direction: column;
 }
 
