@@ -16,7 +16,7 @@ const Playlist = ({playlist}) => {
     }; 
 
     return(
-        <div className="playlist-cont">
+        <div className="playlist-cont col-center">
             <button 
                 type="button" 
                 className="save-btn btn btn-light btn-sm" 

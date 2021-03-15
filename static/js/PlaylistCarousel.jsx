@@ -21,7 +21,7 @@ const PlaylistCarousel = ({playlists, n}) => {
     }, [playlists, pos]);
 
     return(
-        <div className="carousel">
+        <div className="f carousel">
             {
                 hidePrev ? '' : 
                 <button 
@@ -30,7 +30,7 @@ const PlaylistCarousel = ({playlists, n}) => {
                     &larr;
                 </button>
             }
-            <div className="carousel-slides">
+            <div className="f carousel-slides">
                 {playlists.slice(pos, pos + n)}
             </div>
             

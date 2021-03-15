@@ -1,31 +1,72 @@
+.f {
+    display: flex;
+}
+
+.app {
+    flex-direction: column;
+    width: 75%;
+    margin: auto;
+}
+
+.logo {
+    display: flex;
+    align-self: flex-end;
+    background-color: black;
+    color: white;
+    width: 60px;
+    height: 60px;
+    font-size: 14px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout {
+    align-self: flex-end;
+}
+
+/* Container for all playlists */
+.pl-lib-cont {
+    flex-direction: column;
+   
+}
+
+/* Spotify Playlists */
+
+#pl-h-top {
+    margin-bottom: -30px;
+}
+#pl-h {
+    font-size: 100px;
+}
+
+/* Carousel */
 
 .carousel {
-    display: flex;
-    /* justify-content: space-around; */
-    margin: 0 10%;
     align-items: center;
 }
 
 .carousel-slides {
-    display: flex;
+    flex-grow: 2;
     align-items:center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 /* .carousel-slides div:nth-child(2n) {
     margin-top: -50px;
 } */
 
-
-.playlist-cont {
+.col-center {
     display: flex;
-    flex-direction: column; 
-    padding: 10px; 
+    flex-direction: column;
     align-items: center;
 }
 
+.playlist-cont {
+    padding: 10px; 
+}
+
 .saved-playlist-cont {
-    display: flex;
     flex-direction: column;
     padding: 10px;
     align-items: center;
@@ -61,31 +102,20 @@
     text-align: center; 
 }
 
-.logo {
-    display: flex;
-    background-color: black;
-    color: white;
-    width: 60px;
-    height: 60px;
-    font-size: 16px;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-}
-
-#pl-h {
-    font-size: 100px;
-    margin-bottom: -120px;
-}
-
 /* SAVED PLAYLISTS + TRACKS */
+
+#saved-h {
+    font-size: 90px;
+    align-self: flex-end;
+}
 
 .saved-section {
     display: flex;
-    max-height: 40%;
+    max-height: 30%;
 }
 
 #tracks-container {
+    flex-grow: 2;
     margin-bottom: 10px;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;

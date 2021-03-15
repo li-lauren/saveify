@@ -28,12 +28,12 @@ const App = () => {
     }
 
     return(
-       <div>
+       <div className="f app">
             <div className="logo">SAVEIFY</div>
             {auth ?
                 <button 
                     type="button" 
-                    className="btn btn-light btn-sm" 
+                    className="btn btn-light btn-sm logout" 
                     onClick={logOut}
                 >
                     Logout
