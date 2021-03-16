@@ -6,7 +6,6 @@ const PlaylistScrollBox = ({playlists}) => {
         fetch(`/tracks/${selectedPL}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data.items);
             setTracks(data.items);
         });
     }; 
@@ -32,6 +31,7 @@ const PlaylistScrollBox = ({playlists}) => {
                     <SavedPlaylist 
                         key={i} 
                         playlist={playlist}
+                        selectedPL={selectedPL}
                         setSelectedPL={setSelectedPL}
                     />
                 )}

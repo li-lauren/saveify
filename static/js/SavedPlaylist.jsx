@@ -1,8 +1,13 @@
-const SavedPlaylist = ({playlist, setSelectedPL}) => {
-    
+const SavedPlaylist = ({playlist, selectedPL, setSelectedPL}) => {
+    const [isSelected, setIsSelected] = useState(false);
+
+    useEffect(() => {
+        setIsSelected(playlist.id === selectedPL);
+    }, [selectedPL])
+
     return (
         <div 
-            className="f saved-playlist-cont" 
+            className={"f saved-playlist-cont" + (isSelected ? " selected" : "") } 
             onClick={() => setSelectedPL(playlist.id)}
         >
             <img 
