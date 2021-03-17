@@ -1,4 +1,4 @@
-const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
+const SavePlaylistForm = ({showForm, setShowForm, playlist}) => {
     const [title, setTitle] = useState('');
     const [interval, setInterval] = useState('once');
 
@@ -11,7 +11,7 @@ const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
             body: JSON.stringify({
                 'title': title, 
                 'interval': interval,
-                'playlist_id': playlistID
+                'playlist_id': playlist.id
             })
         };
 
@@ -28,45 +28,48 @@ const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
         <div className="save-cont">
             {
                 showForm ? 
-                <div className="save-form">
+                <div className="f save-form">
+                    <img 
+                        src={playlist.images[0].url} 
+                        alt={playlist.name} 
+                        className="pl-cover"
+                    />
                     <form>
                         <div className="form-group">
-                            <label>Playlist name:</label>
+                            <label>
+                                Save <strong>{playlist.name}</strong> as:
+                            </label>
                             <input 
-                                className="form-control"
+                                className="form-control input-sm"
                                 type="text" 
                                 placeholder="Name"
                                 value={title}
                                 onChange={e => setTitle(e.target.value)}
                             />
                         </div>
-                
-
-                        Save:
-                        <br/>
-                        <div className="form-check">
+                            
+                        <label className="radio-inline">
                             <input 
-                                className="form-check-input" 
+                                // className="form-check-input" 
                                 type="radio" 
                                 name="interval" 
                                 value="once"
                                 onClick={handleRadio} />
-                            <label className="form-check-label">
-                                Once
-                            </label>
-                        </div>
-                        <div className="form-check">
+                            Once
+                        </label>
+                    
+
+                        <label className="radio-inline">
                             <input 
-                                className="form-check-input" 
+                                // className="form-check-input" 
                                 type="radio" 
                                 name="interval" 
                                 value="weekly"
                                 onClick={handleRadio} 
                             />
-                            <label className="form-check-label">
-                                Weekly
-                            </label>
-                        </div>
+                            Weekly
+                        </label>
+                        
                         <br/>
                         <button 
                             onClick={savePlaylist}

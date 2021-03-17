@@ -41,7 +41,7 @@ const Playlist = ({playlist}) => {
             <SavePlaylistForm 
                 showForm={showForm}
                 setShowForm={setShowForm}
-                playlistID={playlist.id} 
+                playlist={playlist} 
             />
             <span onClick={getTracks}>{playlist.name}</span>  
             {showTracks ? tracks.map((track, i) => <p key={i}>{track.track.name}</p>) : ''}
