@@ -1,20 +1,4 @@
 const Playlist = ({playlist, setSelectedPL}) => {
-    const [tracks, setTracks] = useState([]);
-    const [showTracks, setShowTracks] = useState(false);
-    const [showForm, setShowForm] = useState(false);
-    
-    const getTracks = () => {
-        setShowTracks(!showTracks)
-        if (showTracks) {
-            fetch(`/tracks/${playlist.id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.items);
-                setTracks(data.items);
-            });
-        }
-    }; 
-
     const showSaveForm = () => {
         setSelectedPL(playlist);
     }
@@ -42,11 +26,6 @@ const Playlist = ({playlist, setSelectedPL}) => {
                     className="pl-cover-custom"
                 />
             }
-            {/* <SavePlaylistForm 
-                showForm={showForm}
-                setShowForm={setShowForm}
-                playlist={playlist} 
-            /> */}
             <span>{playlist.name}</span>     
         </div>
     )
