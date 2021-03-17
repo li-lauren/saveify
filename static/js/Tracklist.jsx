@@ -1,8 +1,8 @@
-const Tracklist = ({selectedPL}) => {
+const Tracklist = ({playlistID}) => {
     const [tracks, setTracks] = useState(null);
 
     const getTracks = () => {
-        fetch(`/tracks/${selectedPL}`)
+        fetch(`/tracks/${playlistID}`)
         .then(res => res.json())
         .then(data => {
             setTracks(data.items);
@@ -10,10 +10,10 @@ const Tracklist = ({selectedPL}) => {
     }; 
 
     useEffect(() => {
-        if (selectedPL) {
+        if (playlistID) {
             getTracks();
         } 
-    }, [selectedPL])
+    }, [playlistID])
 
     return (
         <div className="tracks-container">

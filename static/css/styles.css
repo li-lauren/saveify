@@ -86,11 +86,6 @@
     height: 160px;
 }
 
-.save-cont {
-    position: absolute;
-    margin-top: -10px;
-}
-
 .save-btn {
     margin-right: 5px;
     margin-bottom: -35px;
@@ -105,11 +100,32 @@
     text-align: center; 
 }
 
+/* Tracklists */
+
+.tracks-container {
+    flex-grow: 2;
+    overflow: scroll;
+    overflow-x: hidden;
+    background: #e9ecef;
+    padding: 15px;
+}
+
+
 /* Save Form */
+.save-cont {
+    max-height: 50vh;
+    overflow: hidden;
+    margin-top: 20vh;
+}
+
+.save-cont .tracks-container{
+    border-radius: 0 12px 12px 0;
+}
+
 .save-form {
     background: white;
     border: #e9ecef solid 2px;
-    border-radius: 12px;
+    border-radius: 12px 0 0 12px;
     padding: 10px;
     justify-content: space-around;
     align-items: center;
@@ -135,7 +151,7 @@ input[type="radio"] {
     margin-right: 4px;
 }
 
-/* SAVED PLAYLISTS + TRACKS */
+/* SAVED PLAYLISTS */
 
 #saved-h {
     font-size: 90px;
@@ -143,8 +159,7 @@ input[type="radio"] {
 }
 
 .saved-section {
-    display: flex;
-    max-height: 30%;
+    max-height: 40vh;
     overflow: hidden;
 }
 
@@ -160,13 +175,8 @@ input[type="radio"] {
     border-radius: 0 12px 12px 0;
 }
 
-.tracks-container {
-    flex-grow: 2;
-    overflow: scroll;
-    overflow-x: hidden;
-    background: #e9ecef;
+.saved-section .tracks-container {
     border-radius: 12px 0 0 12px;
-    padding: 15px;
 }
 
 .scroll-box {
@@ -178,7 +188,7 @@ input[type="radio"] {
     margin-right: 0;
 }
 
-/* Tracks */
+/* Individual Tracks */
 .track-cont {
     margin-bottom: 5px;
 }

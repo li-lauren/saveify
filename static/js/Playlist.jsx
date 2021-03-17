@@ -1,4 +1,4 @@
-const Playlist = ({playlist}) => {
+const Playlist = ({playlist, setSelectedPL}) => {
     const [tracks, setTracks] = useState([]);
     const [showTracks, setShowTracks] = useState(false);
     const [showForm, setShowForm] = useState(false);
@@ -15,12 +15,16 @@ const Playlist = ({playlist}) => {
         }
     }; 
 
+    const showSaveForm = () => {
+        setSelectedPL(playlist);
+    }
+
     return(
         <div className="playlist-cont col-center">
             <button 
                 type="button" 
                 className="save-btn btn btn-light btn-sm" 
-                onClick={() => setShowForm(true)}
+                onClick={showSaveForm}
             >
                 +
             </button>
@@ -38,14 +42,12 @@ const Playlist = ({playlist}) => {
                     className="pl-cover-custom"
                 />
             }
-            <SavePlaylistForm 
+            {/* <SavePlaylistForm 
                 showForm={showForm}
                 setShowForm={setShowForm}
                 playlist={playlist} 
-            />
-            <span onClick={getTracks}>{playlist.name}</span>  
-            {showTracks ? tracks.map((track, i) => <p key={i}>{track.track.name}</p>) : ''}
-            
+            /> */}
+            <span>{playlist.name}</span>     
         </div>
     )
 }
