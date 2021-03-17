@@ -112,10 +112,19 @@
 
 
 /* Save Form */
+.save-page {
+    flex-direction: column;
+    margin-top: 15vh;
+}
+
+.save-page h1 {
+    font-size: 80px;
+}
+
 .save-cont {
     max-height: 50vh;
     overflow: hidden;
-    margin-top: 20vh;
+    /* margin-top: 20vh; */
 }
 
 .save-cont .tracks-container{
