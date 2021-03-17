@@ -105,6 +105,14 @@
     text-align: center; 
 }
 
+/* Save Form */
+.save-form {
+    background: white;
+    border: #e9ecef solid 2px;
+    border-radius: 12px;
+    padding: 10px;
+}
+
 /* SAVED PLAYLISTS + TRACKS */
 
 #saved-h {

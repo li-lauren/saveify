@@ -28,11 +28,7 @@ const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
         <div className="save-cont">
             {
                 showForm ? 
-                <div>
-                    <button onClick={() => setShowForm(false)}>
-                        Cancel
-                    </button>
-                
+                <div className="save-form">
                     <form>
                         <div className="form-group">
                             <label>Playlist name:</label>
@@ -46,25 +42,41 @@ const SavePlaylistForm = ({showForm, setShowForm, playlistID}) => {
                         </div>
                 
 
-                        Choose when to save:
+                        Save:
                         <br/>
-                        <input 
-                            type="radio" 
-                            name="interval" 
-                            value="once" 
-                            onClick={handleRadio}
-                        />
-                        <label>Once</label>
-
-                        <input 
-                            type="radio" 
-                            name="interval" 
-                            value="weekly" 
-                            onClick={handleRadio}
-                        />
-                        <label>Weekly</label>
+                        <div className="form-check">
+                            <input 
+                                className="form-check-input" 
+                                type="radio" 
+                                name="interval" 
+                                value="once"
+                                onClick={handleRadio} />
+                            <label className="form-check-label">
+                                Once
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input 
+                                className="form-check-input" 
+                                type="radio" 
+                                name="interval" 
+                                value="weekly"
+                                onClick={handleRadio} 
+                            />
+                            <label className="form-check-label">
+                                Weekly
+                            </label>
+                        </div>
                         <br/>
-                        <button onClick={savePlaylist}>Save</button>
+                        <button 
+                            onClick={savePlaylist}
+                            className="btn btn-sm"
+                        >
+                            Save
+                        </button>
+                        <span onClick={() => setShowForm(false)}>
+                            Cancel
+                        </span>
                     </form>
                 </div> : ''
             }
