@@ -1,30 +1,23 @@
 const PlaylistScrollBox = ({playlists}) => {
-    const [tracks, setTracks] = useState([]);
     const [selectedPL, setSelectedPL] = useState(null);
 
-    const getTracks = () => {
-        fetch(`/tracks/${selectedPL}`)
-        .then(res => res.json())
-        .then(data => {
-            setTracks(data.items);
-        });
-    }; 
+    // const getTracks = () => {
+    //     fetch(`/tracks/${selectedPL}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setTracks(data.items);
+    //     });
+    // }; 
 
     useEffect(() => {
-        if (selectedPL) {
-            getTracks()
-        } else {
+        if (playlists && playlists.length > 0 && !selectedPL) {
             setSelectedPL(playlists[0].id)
-        }
-    }, [selectedPL, playlists])
+        } 
+    }, [playlists])
 
     return(
         <div className="saved-section">
-            <div className="tracks-container">
-                {
-                    tracks.map((track, i) => <Track key={i} track={track.track} />) 
-                }
-            </div>
+            <Tracklist selectedPL={selectedPL} />
             <div className="f scroll-box">
            
                 {playlists.map((playlist, i) => 
