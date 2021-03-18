@@ -2,7 +2,8 @@ const PlaylistLib = () => {
     const [regPlaylists, setRegPlaylists] = useState([]);
     const [savedPlaylists, setSavedPlaylists] = useState([]);
     const [selectedPL, setSelectedPL] = useState(null);
-    console.log(selectedPL)
+    const [PLUpdated, setPLUpdated] = useState(false);
+
     const getPlaylists = () => {
         fetch('/playlists')
         .then(res => res.json())
@@ -18,7 +19,7 @@ const PlaylistLib = () => {
 
     useEffect(() => {
         getPlaylists();
-    }, [])
+    }, [PLUpdated])
 
     const regPlaylistComps = regPlaylists.map((playlist, i) =>
         <Playlist key={i} playlist={playlist} setSelectedPL={setSelectedPL} />)
@@ -29,6 +30,8 @@ const PlaylistLib = () => {
                 <SavePlaylistForm 
                     playlist={selectedPL} 
                     setSelectedPL={setSelectedPL}
+                    PLUpdated={PLUpdated}
+                    setPLUpdated={setPLUpdated}
                 /> :
                 <div className="f pl-lib-cont">
                     <h1 id="pl-h-top">Your</h1>

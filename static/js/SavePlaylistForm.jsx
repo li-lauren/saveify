@@ -1,4 +1,5 @@
-const SavePlaylistForm = ({playlist, setSelectedPL}) => {
+const SavePlaylistForm = (props) => {
+    const {playlist, setSelectedPL, PLUpdated, setPLUpdated} = props;
     const [title, setTitle] = useState('');
     const [interval, setInterval] = useState('once');
 
@@ -19,7 +20,8 @@ const SavePlaylistForm = ({playlist, setSelectedPL}) => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setSelectedPL(null)
+            setPLUpdated(!PLUpdated);
+            setSelectedPL(null);
         });
     };
 
@@ -93,7 +95,6 @@ const SavePlaylistForm = ({playlist, setSelectedPL}) => {
                 </div>  
                 <Tracklist playlistID={playlist.id}/>  
             </div>
-
         </div>
         
     )
