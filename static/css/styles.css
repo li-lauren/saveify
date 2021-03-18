@@ -87,17 +87,17 @@
 }
 
 .save-btn {
-    margin-right: 5px;
-    margin-bottom: -35px;
+    margin-right: 8px;
     z-index: 2;
     align-self: flex-end;
-    border-radius: 50%;
     width: 30px; 
     height: 30px; 
     padding: 6px 0px; 
-    border-radius: 15px; 
-    font-size: 12px; 
+    font-size: 40px; 
+    color: white;
     text-align: center; 
+    background-color: transparent;
+    border: none;
 }
 
 /* Tracklists */

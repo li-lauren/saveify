@@ -7,10 +7,10 @@ const Playlist = ({playlist, setSelectedPL}) => {
         <div className="playlist-cont col-center">
             <button 
                 type="button" 
-                className="save-btn btn btn-light btn-sm" 
+                className="save-btn btn" 
                 onClick={showSaveForm}
             >
-                +
+                ...
             </button>
             
             {
