@@ -21,8 +21,6 @@
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-    /* margin-top: 30px; */
-    /* margin-bottom: -60px; */
 }
 
 .logout {
@@ -58,10 +56,6 @@
     align-items:center;
     justify-content: space-between;
 }
-
-/* .carousel-slides div:nth-child(2n) {
-    margin-top: -50px;
-} */
 
 .col-center {
     display: flex;
@@ -126,6 +120,25 @@
     margin-right: -3vh;
 }
 
+/* Individual Tracks */
+.track-cont {
+    margin-bottom: 5px;
+}
+
+.album-cover {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.track-name {
+    margin-bottom: -2px;
+}
+
+.artists {
+    margin-top: 0px;
+    font-size: small;
+}
 
 /* Save Form */
 .save-page {
@@ -140,7 +153,6 @@
 .save-cont {
     max-height: 50vh;
     overflow: hidden;
-    /* margin-top: 20vh; */
 }
 
 .save-cont .tracks-container{
@@ -214,27 +226,6 @@ input[type="radio"] {
     align-items: stretch;
     margin-right: 0;
 }
-
-/* Individual Tracks */
-.track-cont {
-    margin-bottom: 5px;
-}
-
-.album-cover {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-.track-name {
-    margin-bottom: -2px;
-}
-
-.artists {
-    margin-top: 0px;
-    font-size: small;
-}
-
 
 /* Scrollbars */
 ::-webkit-scrollbar {
