@@ -110,6 +110,22 @@
     padding: 15px;
 }
 
+.tracklist-h-cont {
+    flex-grow: 1;
+    
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.tracklist-h {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    color: white;
+    font-size: 60px;
+    position: fixed;
+    margin-right: -3vh;
+}
+
 
 /* Save Form */
 .save-page {

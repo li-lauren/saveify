@@ -16,12 +16,20 @@ const Tracklist = ({playlistID}) => {
     }, [playlistID])
 
     return (
-        <div className="tracks-container">
-            {
-                tracks ? 
-                tracks.map((track, i) => 
-                <Track key={i} track={track.track} />) : ''
-            }
+        <div className="f tracks-container">
+            <div>
+                {
+                    tracks ? 
+                    tracks.map((track, i) => 
+                    <Track key={i} track={track.track} />) : ''
+                }
+            </div>
+            <div className="f tracklist-h-cont">
+                <span className="tracklist-h">
+                    Tracks
+                </span>
+            </div>
+            
         </div>
     )
 }
