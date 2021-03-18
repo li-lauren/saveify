@@ -145,16 +145,18 @@
 
 .save-cont .tracks-container{
     border-radius: 0 12px 12px 0;
+    flex: 1.75;
 }
 
 .save-form {
+    flex: 1;
+    flex-direction: column;
     background: white;
     border: #e9ecef solid 2px;
     border-radius: 12px 0 0 12px;
-    padding: 10px;
-    justify-content: space-around;
+    padding: 15px;
+    justify-content: center;
     align-items: center;
-    z-index: 5;
 }
 
 .save-form img {
