@@ -1,3 +1,8 @@
+/* body {
+    font-size: calc(16px + 1vw);
+    line-height: calc(1.1em + 0.5vw);
+  } */
+
 .f {
     display: flex;
 }
@@ -41,7 +46,8 @@
     margin-top: 2rem;
 }
 #pl-h {
-    font-size: 5rem;
+    /* font-size: 5rem; */
+    font-size: calc(1.2em + 3vw);
 }
 
 /* Carousel */
@@ -152,7 +158,8 @@
 }
 
 .save-cont {
-    max-height: 30vh;
+    min-height: 400px;
+    max-height: 40vw;
     overflow: hidden;
 }
 
