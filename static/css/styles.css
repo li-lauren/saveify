@@ -13,6 +13,9 @@
     height: 100vh;
     margin: auto;
     padding-top: 40px;
+    min-width: 700px;
+    min-height: 800px;
+    max-width: 900px;
 }
 
 .logo {
@@ -42,9 +45,11 @@
 
 /* Spotify Playlists */
 #pl-h-top {
-    margin-bottom: -1.25rem;
+    margin-bottom: -1.25vh;
     margin-top: 2rem;
+    font-size: 1.25em;
 }
+
 #pl-h {
     /* font-size: 5rem; */
     font-size: calc(1.2em + 3vw);
@@ -77,14 +82,14 @@
 }
 
 .pl-cover {
-   width: 160px;
-   height: 160px; 
+   width: 15vh;
+   height: 15vh; 
 }
 
 .pl-cover-custom {
     object-fit: cover;
-    width: 160px;
-    height: 160px;
+    width: 15vh;
+    height: 15vh;
 }
 
 .save-btn {
@@ -154,7 +159,8 @@
 }
 
 .save-page h1 {
-    font-size: 80px;
+    /* font-size: 80px; */
+    font-size: calc(1.2em + 3vw);
 }
 
 .save-cont {
@@ -201,7 +207,8 @@ input[type="radio"] {
 /* SAVED PLAYLISTS */
 
 #saved-h {
-    font-size: 90px;
+    /* font-size: 90px; */
+    font-size: calc(1.2em + 3vw);
     align-self: flex-end;
 }
 
